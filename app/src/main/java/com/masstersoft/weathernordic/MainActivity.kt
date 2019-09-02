@@ -11,4 +11,5 @@ class MainActivity : AppCompatActivity() {
     }
 
     //"api.openweathermap.org/data/2.5/weather?q=London&appid=58c3cdec0969373fd82d01a13c7de5bc"
+    //https://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=58c3cdec0969373fd82d01a13c7de5bc&units=metric
 }
