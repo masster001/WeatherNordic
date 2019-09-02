@@ -9,4 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+    //"api.openweathermap.org/data/2.5/weather?q=London&appid=58c3cdec0969373fd82d01a13c7de5bc"
 }
