@@ -7,3 +7,8 @@ data class CurrentWeather(
     var wind: ForecastWind,
     @SerializedName("name") var cityName: String
 )
+
+
+
+
+

@@ -16,4 +16,29 @@ interface Api {
         @Query("appid") apiKey: String = Constants.API_KEY,
         @Query("units") units: String = Constants.UNITS
     ): Call<CurrentWeather>
+
+    @GET("weather")
+    fun getCurrentWeather(
+        @Query("q") query: String,
+
+        @Query("appid") apiKey: String = Constants.API_KEY,
+        @Query("units") units: String = Constants.UNITS
+    ): Call<CurrentWeather>
+
+    @GET("forecast")
+    fun getForecastForFiveDays(
+        @Query("lat") latitude: Double,
+        @Query("lon") longitude: Double,
+
+        @Query("appid") apiKey: String = Constants.API_KEY,
+        @Query("units") units: String = Constants.UNITS
+    ): Call<CurrentWeather>
+
+    @GET("forecast")
+    fun getForecastForFiveDays(
+        @Query("q") query: String,
+
+        @Query("appid") apiKey: String = Constants.API_KEY,
+        @Query("units") units: String = Constants.UNITS
+    ): Call<CurrentWeather>
 }

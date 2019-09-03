@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiFactory {
     companion object {
-        public fun createApi(): Api {
+        fun createApi(): Api {
             val retrofit = Retrofit.Builder()
                 .baseUrl(Constants.API_BASE_URL) // Базовый URL
                 .addConverterFactory(GsonConverterFactory.create()) // Конвертер JSON
