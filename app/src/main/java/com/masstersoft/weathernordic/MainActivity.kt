@@ -1,9 +1,10 @@
 package com.masstersoft.weathernordic
 
+import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.masstersoft.weathernordic.api.ApiFactory
+import com.masstersoft.weathernordic.api.Constants
 import com.masstersoft.weathernordic.model.CurrentWeather
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,21 +16,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ApiFactory.createApi()
+        App.api
             .getCurrentWeather(35.02, 139.01)
             .enqueue(object : Callback<CurrentWeather> {
 
                 override fun onFailure(call: Call<CurrentWeather>, t: Throwable) {
-                    Log.d("Nordic",t.toString())
+                    Log.d(Constants.TAG, t.toString())
                 }
 
                 override fun onResponse(
                     call: Call<CurrentWeather>,
                     response: Response<CurrentWeather>
                 ) {
-                    Log.d("Nordic",response.body().toString())
+                    Log.d(Constants.TAG, response.body().toString())
                 }
             })
+
+
+        object : AsyncTask<Any, Any, Response<CurrentWeather>>() {
+            override fun doInBackground(vararg p0: Any?): Response<CurrentWeather> {
+                return App.api
+                    .getCurrentWeather(34.0, 34.9)
+                    .execute()
+            }
+
+            override fun onPostExecute(result: Response<CurrentWeather>) {
+                Log.d(Constants.TAG, result.toString())
+            }
+        }.execute()
+
+//        Log.d(Constants.TAG,
+//            App.api
+//                .getCurrentWeather(34.0,34.9)
+//                .execute()
+//                .body()
+//                .toString())
     }
 
 }
