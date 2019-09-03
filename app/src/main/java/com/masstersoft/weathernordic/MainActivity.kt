@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.masstersoft.weathernordic.api.Constants
 import com.masstersoft.weathernordic.model.CurrentWeather
+import com.masstersoft.weathernordic.model.ForecastMain
+import com.masstersoft.weathernordic.model.WeatherForFiveDays
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -16,18 +18,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         App.api
-            .getCurrentWeather(35.02, 139.01)
-            .enqueue(object : Callback<CurrentWeather> {
+            .getForecastForFiveDays("Moscow")
+            .enqueue(object : Callback<WeatherForFiveDays> {
 
-                override fun onFailure(call: Call<CurrentWeather>, t: Throwable) {
+                override fun onFailure(call: Call<WeatherForFiveDays>, t: Throwable) {
                     Log.d(Constants.TAG, t.toString())
                 }
 
                 override fun onResponse(
-                    call: Call<CurrentWeather>,
-                    response: Response<CurrentWeather>
+                    call: Call<WeatherForFiveDays>,
+                    response: Response<WeatherForFiveDays>
                 ) {
-                    parseResponse(response)
+                    parseList(response)
                 }
             })
 
@@ -50,6 +52,17 @@ class MainActivity : AppCompatActivity() {
 //                .execute()
 //                .body()
 //                .toString())
+    }
+
+    fun parseList(result: Response<WeatherForFiveDays>) {
+        when (result.code()) {
+            in 200..299 -> printList(result.body()?.list)
+            else -> result.errorBody().toString()
+        }
+    }
+
+    fun printList(list: MutableList<ForecastMain>?) {
+        list?.forEach { Log.d(Constants.TAG, it.toString()) }
     }
 
     fun parseResponse(result: Response<CurrentWeather>) {
