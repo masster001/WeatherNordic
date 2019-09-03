@@ -3,19 +3,28 @@ package com.masstersoft.weathernordic
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.masstersoft.weathernordic.api.Constants
 import com.masstersoft.weathernordic.model.CurrentWeather
-import com.masstersoft.weathernordic.model.ForecastMain
 import com.masstersoft.weathernordic.model.WeatherForFiveDays
+import com.masstersoft.weathernordic.recycler.WeatherAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var adapter: WeatherAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        adapter = WeatherAdapter(arrayListOf())
+
+        itemList.layoutManager = LinearLayoutManager(this)
+        itemList.adapter = adapter
 
         App.api
             .getForecastForFiveDays("Moscow")
@@ -29,8 +38,8 @@ class MainActivity : AppCompatActivity() {
                     call: Call<WeatherForFiveDays>,
                     response: Response<WeatherForFiveDays>
                 ) {
-                    parseList(response)
-                    var i = 0
+                    adapter = WeatherAdapter(response.body()!!.list)
+                    itemList.adapter = adapter
                 }
             })
 

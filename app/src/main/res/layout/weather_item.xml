@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Temp"
+        android:textAllCaps="true"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/pressure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="pressure"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="humidity" />
+
+</LinearLayout>
