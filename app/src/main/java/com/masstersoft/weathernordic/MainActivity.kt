@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
                     response: Response<WeatherForFiveDays>
                 ) {
                     parseList(response)
+                    var i = 0
                 }
             })
 
@@ -61,8 +62,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun printList(list: MutableList<ForecastMain>?) {
-        list?.forEach { Log.d(Constants.TAG, it.toString()) }
+    fun printList(list: ArrayList<CurrentWeather>?) {
+        //list?.forEach { Log.d(Constants.TAG, it.toString()) }
+        Log.d(Constants.TAG, list.toString())
     }
 
     fun parseResponse(result: Response<CurrentWeather>) {
