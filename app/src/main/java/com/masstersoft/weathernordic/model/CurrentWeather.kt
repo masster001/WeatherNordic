@@ -9,7 +9,7 @@ data class CurrentWeather(
     var main: ForecastMain,
     var wind: ForecastWind,
     var clouds: ForecastClouds,
-    @SerializedName("name") var cityName: String
+    @SerializedName("name") var cityName: String?
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

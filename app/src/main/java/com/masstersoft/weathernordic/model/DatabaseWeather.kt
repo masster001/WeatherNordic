@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.masstersoft.weathernordic.model.converters.ForecastCloudsConverter
+import com.masstersoft.weathernordic.model.converters.ForecastMainConverter
+import com.masstersoft.weathernordic.model.converters.ForecastWindConverter
 
 @Database(
     entities = arrayOf(
@@ -13,9 +17,14 @@ import androidx.room.RoomDatabase
         ForecastWind::class
     ), version = 1
 )
+@TypeConverters(
+    ForecastMainConverter::class,
+    ForecastWindConverter::class,
+    ForecastCloudsConverter::class
+)
 abstract class DatabaseWeather : RoomDatabase() {
 
-    abstract fun weatherDao(): DatabaseWeather
+    abstract fun weatherDao(): WeatherDao
 
     companion object {
         @Volatile

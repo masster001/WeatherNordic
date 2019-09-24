@@ -8,14 +8,24 @@ import androidx.room.Query
 
 @Dao
 interface WeatherDao {
-    @Query("SELECT * FROM CurrentWeather")
-    fun getAll(): List<CurrentWeather>
 
     @Insert
-    fun insert(currentWeather: CurrentWeather)
+    fun insertCurrentWeather(currentWeather: CurrentWeather)
+
+    @Query("SELECT * FROM CurrentWeather")
+    fun getCurrentWeatherList(): List<CurrentWeather>
+
+    @Query("DELETE FROM CurrentWeather")
+    fun clearCurrentWeather()
+
+    @Query("SELECT * FROM ForecastWind")
+    fun getAll(): List<ForecastWind>
+
+    @Insert
+    fun insert(currentWeather: ForecastWind)
 
     @Delete
-    fun delete(currentWeather: CurrentWeather)
+    fun delete(currentWeather: ForecastWind)
 
     @Query("SELECT * FROM ForecastMain")
     fun getForecastMain(): List<ForecastMain>
